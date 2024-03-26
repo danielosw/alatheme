@@ -13,7 +13,7 @@ def main() -> None:
     theme = parse.parse_args()
     theme = theme.name
     fileopened: bool = False
-    if theme == "complete_fish":
+    if theme == "list":
         print(list())
         sys.exit()
     try:
@@ -51,7 +51,7 @@ def list() -> str:
         themes = [f for f in listdir(path) if isfile(join(path, f))]
     except FileNotFoundError:
         try:
-            path = str(Path.home())+"\\appadata\\roaming\\alacritty\\themes\\"
+            path = str(Path.home())+"\\appdata\\roaming\\alacritty\\themes\\"
             themes = [f for f in listdir(path) if isfile(join(path, f))]
         except FileNotFoundError:
             raise FileNotFoundError("Can't find themes")

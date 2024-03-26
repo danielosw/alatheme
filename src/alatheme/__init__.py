@@ -25,7 +25,7 @@ def main() -> None:
         pass
     if fileopened is False:
         try:
-            path = str(Path.home())+"/appdata/local/alacritty.toml"
+            path = str(Path.home())+"\\appdata\\roaming\\alacritty\\alacritty.toml"
             with open(path, "r+") as f:
                 fileopened = True
                 toml = tomlkit.parse(f.read().strip())
@@ -38,8 +38,8 @@ def main() -> None:
             toml['import'] = ['~/.config/alacritty/themes/'+theme+'.toml']
             with open(path, "w+") as f:
                 f.write(tomlkit.dumps(toml))
-        elif Path(str(Path.home())+"/appdata/local/alacritty/themes/"+theme+".toml").is_file():
-            toml['import'] = "~/appdata/local/alacritty/themes/"+theme+".toml"
+        elif Path(str(Path.home())+"\\appdata\\roaming\\alacritty\\themes\\"+theme+".toml").is_file():
+            toml['import'] = [str(Path.home())+"\\appdata\\roaming\\alacritty\\themes\\"+theme+".toml"]
             with open(path, "w+") as f:
                 f.write(tomlkit.dumps(toml))
         else:
@@ -51,7 +51,7 @@ def list() -> str:
         themes = [f for f in listdir(path) if isfile(join(path, f))]
     except FileNotFoundError:
         try:
-            path = str(Path.home())+"/appadata/local/alacritty/themes/"
+            path = str(Path.home())+"\\appadata\\roaming\\alacritty\\themes\\"
             themes = [f for f in listdir(path) if isfile(join(path, f))]
         except FileNotFoundError:
             raise FileNotFoundError("Can't find themes")
@@ -61,3 +61,5 @@ def list() -> str:
         themesstr+=theme.strip().replace(".toml","")+"\n"
     return themesstr
 
+if __name__ == "__main__":
+    main()
